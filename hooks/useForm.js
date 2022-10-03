@@ -38,20 +38,27 @@ const useForm = ({ init, validate }) => {
     const { errors } = getErrors();
 
     const oldState = deepClone(state);
-    console.log(errors, key);
     if (oldState[key].touched && errors[key]) {
       oldState[key].error = errors[key];
     } else {
       oldState[key].error = "";
     }
     oldState[key].focused = false;
-    console.log(oldState);
     setState(oldState);
   };
 
   const handleSubmit = (e, cb) => {
     e.preventDefault();
     const { errors, hasError, values } = getErrors();
+    const oldState = deepClone(state);
+    const newState = Object.keys(oldState).reduce((acc, key) => {
+      acc[key] = {
+        ...oldState[key],
+        error: errors[key],
+      };
+      return acc;
+    }, {});
+    console.log(newState);
     cb({
       errors,
       hasError,
@@ -59,6 +66,7 @@ const useForm = ({ init, validate }) => {
       touched: mapStateToKeys(state, "touched"),
       focused: mapStateToKeys(state, "focused"),
     });
+    setState(newState);
   };
   const clear = () => {
     const newState = mapStateToKeys(state, true);
@@ -82,7 +90,6 @@ const useForm = ({ init, validate }) => {
     } else {
       throw new Error("validate property must be boolean or function");
     }
-    console.log(errors);
     return {
       errors,
       hasError,

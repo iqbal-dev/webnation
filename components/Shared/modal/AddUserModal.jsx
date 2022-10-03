@@ -25,10 +25,14 @@ const AddUserModal = ({ setOpenModal, close, handleAddNewMember }) => {
     init,
     validate,
   });
-  const onSubmit = ({ hasError, values, errors }) => {
+  const onSubmit = async ({ hasError, values, errors }) => {
     console.log(hasError, values, errors);
-    handleAddNewMember(values);
+    if (!hasError) {
+      await handleAddNewMember(values);
+      setOpenModal(false);
+    }
   };
+  console.log(state);
   return (
     <ModalWrapper
       onClick={() => {
