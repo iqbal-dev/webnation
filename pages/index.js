@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import Button from "../components/UI/buttons/Button.jsx";
+import Inputs from "../components/UI/froms/Inputs.jsx";
 
 export default function Home(props) {
   const [data, setData] = useState(props.users);
@@ -13,6 +14,7 @@ export default function Home(props) {
           <li key={item.id}>{item.name}</li>
         ))}
       </ul>
+      <Inputs type="password" />
       <Button>Webnation</Button>
     </div>
   );
