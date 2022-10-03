@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 const CardTextContainer = styled.div`
   padding: 2px 16px;
   text-align: center;

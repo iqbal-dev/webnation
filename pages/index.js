@@ -1,152 +1,49 @@
 import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
-import Card from "../components/Shared/card/Card.jsx";
+import UserCard from "../components/Shared/card/UserCard.jsx";
 import Button from "../components/UI/buttons/Button.jsx";
-import CardTextContainer from "../components/UI/cards/CardTextContainer.jsx";
 import Inputs from "../components/UI/froms/Inputs.jsx";
-import Labels from "../components/UI/froms/Labels.jsx";
-import Text from "../components/UI/typography/Text.jsx";
 const Container = styled.div`
-  width: 80%;
+  width: 90%;
   margin: 10px auto;
 `;
 export default function Home(props) {
   const [data, setData] = useState(props.users);
+  const handleChange = (e) => {
+    console.log(e.target.value);
+  };
+  console.log(data);
   return (
     <Container>
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: "1.5rem",
+          gap: "1rem",
+          margin: "2rem 0",
         }}
       >
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
-        <Card>
-          <CardTextContainer>
-            <Text size="lg">Joh Doe</Text>
-            <h4>email:text@gmail.com</h4>
-            <p>Phone: 3878q2348</p>
-          </CardTextContainer>
-        </Card>
+        <Inputs type="text" placeholder="Search" onChange={handleChange} />
+        <Button>Webnation</Button>
       </div>
-      <Labels>Web Nation</Labels>
-      <Inputs type="password" placeholder="Enter your password" />
-      <Text>asdjhfj</Text>
-      <Button>Webnation</Button>
+      <div
+        style={{
+          display: "grid",
+          width: "100%",
+          gridGap: "3rem",
+          gridTemplateColumns: "repeat(auto-fit, minmax(20rem, 1fr))",
+          alignItems: "start",
+        }}
+      >
+        {data?.map((item) => (
+          <UserCard
+            key={item.id}
+            name={item.name}
+            phone={item.phone}
+            email={item.email}
+          />
+        ))}
+      </div>
     </Container>
   );
 }
