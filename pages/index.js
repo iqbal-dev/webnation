@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 import UserCard from "../components/Shared/card/UserCard.jsx";
+import AddUserModal from "../components/Shared/modal/AddUserModal.jsx";
 import Button from "../components/UI/buttons/Button.jsx";
 import Inputs from "../components/UI/froms/Inputs.jsx";
 const Container = styled.div`
@@ -10,6 +11,7 @@ const Container = styled.div`
 `;
 export default function Home(props) {
   const [data, setData] = useState(props.users);
+  const [modalOpen, setModalOpen] = useState(false);
   const handleChange = (e) => {
     console.log(e.target.value);
   };
@@ -24,7 +26,13 @@ export default function Home(props) {
         }}
       >
         <Inputs type="text" placeholder="Search" onChange={handleChange} />
-        <Button>Webnation</Button>
+        <Button
+          onClick={() => {
+            setModalOpen(true);
+          }}
+        >
+          Webnation
+        </Button>
       </div>
       <div
         style={{
@@ -44,6 +52,9 @@ export default function Home(props) {
           />
         ))}
       </div>
+      {modalOpen && (
+        <AddUserModal setOpenModal={setModalOpen} modalOpen={modalOpen} />
+      )}
     </Container>
   );
 }
