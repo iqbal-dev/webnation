@@ -13,7 +13,7 @@ const init = {
   phone: "",
 };
 
-const AddUserModal = ({ setOpenModal, close }) => {
+const AddUserModal = ({ setOpenModal, close, handleAddNewMember }) => {
   const {
     formState: state,
     handleChange,
@@ -27,6 +27,7 @@ const AddUserModal = ({ setOpenModal, close }) => {
   });
   const onSubmit = ({ hasError, values, errors }) => {
     console.log(hasError, values, errors);
+    handleAddNewMember(values);
   };
   return (
     <ModalWrapper

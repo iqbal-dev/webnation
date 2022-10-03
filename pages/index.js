@@ -10,12 +10,14 @@ const Container = styled.div`
   margin: 10px auto;
 `;
 export default function Home(props) {
-  const [data, setData] = useState(props.users);
+  const [userData, setUserData] = useState(props.users);
   const [modalOpen, setModalOpen] = useState(false);
   const handleChange = (e) => {
     console.log(e.target.value);
   };
-  console.log(data);
+  const handleAddNewMember = (newMember) => {
+    setUserData((prev) => [...prev, newMember]);
+  };
   return (
     <Container>
       <div
@@ -43,7 +45,7 @@ export default function Home(props) {
           alignItems: "start",
         }}
       >
-        {data?.map((item) => (
+        {userData?.map((item) => (
           <UserCard
             key={item.id}
             name={item.name}
@@ -53,7 +55,11 @@ export default function Home(props) {
         ))}
       </div>
       {modalOpen && (
-        <AddUserModal setOpenModal={setModalOpen} modalOpen={modalOpen} />
+        <AddUserModal
+          setOpenModal={setModalOpen}
+          modalOpen={modalOpen}
+          handleAddNewMember={handleAddNewMember}
+        />
       )}
     </Container>
   );
