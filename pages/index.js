@@ -71,24 +71,28 @@ export default function Home(props) {
             Result Matches:{filterData?.length}
           </p>
         )}
-        <div
-          style={{
-            display: "grid",
-            width: "100%",
-            gridGap: "3rem",
-            gridTemplateColumns: "repeat(auto-fit, minmax(20rem, 1fr))",
-            alignItems: "start",
-          }}
-        >
-          {filterData?.map((item) => (
-            <UserCard
-              key={item.id}
-              name={item.name}
-              phone={item.phone}
-              email={item.email}
-            />
-          ))}
-        </div>
+        {filterData?.length ? (
+          <div
+            style={{
+              display: "grid",
+              width: "100%",
+              gridGap: "3rem",
+              gridTemplateColumns: "repeat(auto-fit, minmax(20rem, 1fr))",
+              alignItems: "start",
+            }}
+          >
+            {filterData?.map((item) => (
+              <UserCard
+                key={item.id}
+                name={item.name}
+                phone={item.phone}
+                email={item.email}
+              />
+            ))}
+          </div>
+        ) : (
+          <h3 style={{ textAlign: "center" }}>User is not found</h3>
+        )}
         {modalOpen && (
           <AddUserModal
             setOpenModal={setModalOpen}
